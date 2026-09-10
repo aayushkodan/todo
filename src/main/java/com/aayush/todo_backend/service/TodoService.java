@@ -19,12 +19,21 @@ public class TodoService {
 	private final List<Todo> todos = new CopyOnWriteArrayList<>();
 	private final AtomicLong idCounter = new AtomicLong(1);
 
+	public TodoService() {
+		init();
+	}
+
 	@PostConstruct
 	public void init() {
+		if (!todos.isEmpty()) {
+			return;
+		}
 		// Seed with initial sample todos for demonstration and testing
 		createTodo(new CreateTodoRequest("Learn Spring Boot", "Explore REST APIs and service architecture", true));
 		createTodo(new CreateTodoRequest("Build Todo Application", "Create frontend and backend services", false));
-		createTodo(new CreateTodoRequest("Deploy with Kubernetes", "Setup CI/CD pipeline and k8s manifests", false));
+		createTodo(new CreateTodoRequest("Dockerize the Application", "Create optimized multi-stage Dockerfile for containerization", false));
+		createTodo(new CreateTodoRequest("Deploy with Kubernetes", "Setup CI/CD pipeline, Deployment, and Service manifests", false));
+		createTodo(new CreateTodoRequest("Configure Monitoring & Logging", "Integrate Prometheus and Grafana for metrics and alerts", false));
 	}
 
 	public List<Todo> getAllTodos(Boolean completed, String search) {
