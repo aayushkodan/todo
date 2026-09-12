@@ -18,5 +18,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v7
 
-      - name: list files
-        run: ls
+      - name: Setup Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Check Java version
+        run: java --version
+      
